@@ -2381,9 +2381,9 @@ do_ed_script (char *input_name, struct outfile *output, FILE *ofp)
       pfatal ("Failed to duplicate standard input");
     assert (output_name[0] != '!' && output_name[0] != '-');
     idx_t output_namelen = quote_system_arg (nullptr, output_name);
-    char *command = ximalloc (sizeof (EDITOR_PROGRAM " - ") + output_namelen);
+    char *command = ximalloc (sizeof (EDITOR_PROGRAM " -s ") + output_namelen);
     char *p = command;
-    p = stpcpy (p, EDITOR_PROGRAM " - ");
+    p = stpcpy (p, EDITOR_PROGRAM " -s ");
     p += quote_system_arg (p, output_name);
     *p = '\0';
     int status = systemic (command);
