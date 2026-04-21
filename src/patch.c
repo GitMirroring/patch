@@ -1170,9 +1170,6 @@ locate_hunk (idx_t fuzz)
     ptrdiff_t max_offset = MAX (max_pos_offset, max_neg_offset);
     ptrdiff_t min_offset;
 
-    if (!pat_lines)			/* null range matches always */
-	return first_guess;
-
     /* Do not try lines <= 0.  */
     if (first_guess <= max_neg_offset)
 	max_neg_offset = first_guess - 1;
