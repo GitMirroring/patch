@@ -435,3 +435,23 @@ ncheck 'ln -sf d l'
 check 'patch -p1 -i l/ab.diff' <<EOF
 patching file foo
 EOF
+
+cat > wrong-base.diff <<EOF
+--- d1/link/target
++++ d1/link/target
+@@ -1 +1 @@
+-old
++new
+EOF
+
+mkdir -p sub d1
+echo old > sub/target
+ln -s "$PWD/sub" d1/link
+
+check 'patch -p0 < wrong-base.diff' <<EOF
+patching file d1/link/target
+EOF
+
+check 'cat sub/target' <<EOF
+new
+EOF
